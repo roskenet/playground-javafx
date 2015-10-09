@@ -22,9 +22,16 @@ public class PlaygroundJavafxApplication extends AbstractJavaFxApplicationSuppor
 	@Qualifier("main")
 	private AbstractFxmlView mainView;
 
+	@Autowired
+	@Qualifier("test")
+	private AbstractFxmlView testView;
+	
+	private Stage stage;
+	
 	@Override
 	public void start(Stage stage) throws Exception {
-
+		this.stage = stage;
+		
 		stage.setTitle(windowTitle);
 		stage.setScene(new Scene(mainView.getView()));
 		stage.setResizable(true);
@@ -32,6 +39,10 @@ public class PlaygroundJavafxApplication extends AbstractJavaFxApplicationSuppor
 		stage.show();
 	}
 
+	public void showTestView(Stage stage) {
+		stage.setScene(new Scene(testView.getView()));
+	}
+	
 	public static void main(String[] args) {
 		launchApp(PlaygroundJavafxApplication.class, args);
 	}
