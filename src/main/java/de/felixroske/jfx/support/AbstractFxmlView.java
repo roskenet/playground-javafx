@@ -30,10 +30,13 @@ import javafx.scene.layout.AnchorPane;
  * "https://github.com/AdamBien/afterburner.fx/blob/02f25fdde9629fcce50ea8ace5dec4f802958c8d/src/main/java/com/airhacks/afterburner/views/FXMLView.java"
  * >FXMLView</a> that provides DI for Java FX Controllers via Spring.
  * 
+ * Felix Roske <felix.roske@zalando.de> changed this, so it always expects fxml Files in /fxml/.
+ * 
  * @author Thomas Darimont
  */
 public abstract class AbstractFxmlView implements ApplicationContextAware {
 
+	private static final String FXML_ROOT = "/fxml/";
 	protected ObjectProperty<Object> presenterProperty;
 	protected FXMLLoader fxmlLoader;
 	protected ResourceBundle bundle;
@@ -55,7 +58,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
 	public AbstractFxmlView() {
 
 		this.presenterProperty = new SimpleObjectProperty<>();
-		this.resource = getClass().getResource(getFxmlName());
+		this.resource = getClass().getResource(getRootDirFxmlName());
 		this.bundle = getResourceBundle(getBundleName());
 	}
 
@@ -205,6 +208,10 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
 		return getConventionalName(".fxml");
 	}
 
+	final String getRootDirFxmlName() {
+		return FXML_ROOT + getConventionalName(".fxml");
+	}
+	
 	private ResourceBundle getResourceBundle(String name) {
 		try {
 			return getBundle(name);
