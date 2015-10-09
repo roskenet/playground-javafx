@@ -19,28 +19,24 @@ public class PlaygroundJavafxApplication extends AbstractJavaFxApplicationSuppor
 	private String windowTitle;
 
 	@Autowired 
-	@Qualifier("main")
-	private AbstractFxmlView mainView;
-
-	@Autowired
-	@Qualifier("test")
-	private AbstractFxmlView testView;
-	
-	private Stage stage;
+	private ViewCollection views;
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		this.stage = stage;
+		views.setStage(stage);
+		
+		Scene scene = new Scene(views.getMainView().getView());
+		views.setScene(scene);
 		
 		stage.setTitle(windowTitle);
-		stage.setScene(new Scene(mainView.getView()));
+		stage.setScene(scene);
 		stage.setResizable(true);
 		stage.centerOnScreen();
 		stage.show();
 	}
 
-	public void showTestView(Stage stage) {
-		stage.setScene(new Scene(testView.getView()));
+	public void showTestView() {
+		views.showTestView();
 	}
 	
 	public static void main(String[] args) {
