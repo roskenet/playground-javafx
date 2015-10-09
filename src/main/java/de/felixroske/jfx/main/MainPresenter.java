@@ -1,15 +1,19 @@
 package de.felixroske.jfx.main;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import de.felixroske.jfx.test.MyTestService;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 @Component
-public class MainPresenter {
+public class MainPresenter implements Initializable{
 
 	@Autowired
 	private MyTestService testService;
@@ -17,11 +21,22 @@ public class MainPresenter {
 	@FXML
 	private TextField testTextField;
 	
-	@FXML
-	private Button myButton;
+	private MainModel mainModel = new MainModel();
 	
 	@FXML
 	public void myButtonClicked(){
 		System.out.println(testService.magicMethod(testTextField.getText()));
+		testService.magicMethod(mainModel);
+	}
+
+	@FXML
+	public void reset() {
+		mainModel.reset();
+	}
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		testTextField.textProperty().bindBidirectional(mainModel.getTestTextField());
 	}
 }

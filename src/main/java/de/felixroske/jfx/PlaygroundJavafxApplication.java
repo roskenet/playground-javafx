@@ -1,11 +1,12 @@
 package de.felixroske.jfx;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Lazy;
 
-import de.felixroske.jfx.main.MainView;
+import de.felixroske.jfx.support.AbstractFxmlView;
 import de.felixroske.jfx.support.AbstractJavaFxApplicationSupport;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,13 +15,12 @@ import javafx.stage.Stage;
 @SpringBootApplication
 public class PlaygroundJavafxApplication extends AbstractJavaFxApplicationSupport{
 
-	/**
-	 * Note that this is configured in application.properties
-	 */
-	@Value("${app.ui.title:Example App}")//
+	@Value("${app.ui.title:Example App}")
 	private String windowTitle;
 
-	@Autowired MainView mainView;
+	@Autowired 
+	@Qualifier("main")
+	private AbstractFxmlView mainView;
 
 	@Override
 	public void start(Stage stage) throws Exception {

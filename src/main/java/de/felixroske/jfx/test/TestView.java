@@ -1,11 +1,12 @@
-package de.felixroske.jfx.main;
+package de.felixroske.jfx.test;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import de.felixroske.jfx.support.AbstractFxmlView;
+
 @Component
-@Qualifier("main")
-public class MainView extends AbstractFxmlView{
+@Qualifier("test")
+public class TestView extends AbstractFxmlView {
 
 }
