@@ -39,6 +39,10 @@ public class PlaygroundJavafxApplication extends AbstractJavaFxApplicationSuppor
 		views.showTestView();
 	}
 	
+	public void showMainView() {
+		views.showMainView();
+	}
+	
 	public static void main(String[] args) {
 		launchApp(PlaygroundJavafxApplication.class, args);
 	}

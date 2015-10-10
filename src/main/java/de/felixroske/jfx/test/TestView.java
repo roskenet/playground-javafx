@@ -9,4 +9,7 @@ import de.felixroske.jfx.support.AbstractFxmlView;
 @Qualifier("test")
 public class TestView extends AbstractFxmlView {
 
+	public TestView() {
+		super("/fxml/subfile/");
+	}
 }

@@ -43,5 +43,9 @@ public class ViewCollection {
 //		stage.setScene(new Scene(testView.getView()));
 	}
 	
+	public void showMainView() {
+		scene.setRoot(mainView.getView());
+//		stage.setScene(new Scene(testView.getView()));
+	}
 	
 }

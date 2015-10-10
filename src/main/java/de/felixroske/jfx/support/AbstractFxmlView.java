@@ -36,7 +36,8 @@ import javafx.scene.layout.AnchorPane;
  */
 public abstract class AbstractFxmlView implements ApplicationContextAware {
 
-	private static final String FXML_ROOT = "/fxml/";
+	private static String FXML_PATH = "/fxml/";
+	
 	protected ObjectProperty<Object> presenterProperty;
 	protected FXMLLoader fxmlLoader;
 	protected ResourceBundle bundle;
@@ -44,6 +45,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
 	protected URL resource;
 
 	private ApplicationContext applicationContext;
+	private String fxmlRoot;
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -54,11 +56,15 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
 
 		this.applicationContext = applicationContext;
 	}
-
+	
 	public AbstractFxmlView() {
-
+		this(FXML_PATH);
+	}
+	
+	public AbstractFxmlView(String path) {
+		setFxmlRootPath(path);
 		this.presenterProperty = new SimpleObjectProperty<>();
-		this.resource = getClass().getResource(getRootDirFxmlName());
+		this.resource = getClass().getResource(getFxmlPath());
 		this.bundle = getResourceBundle(getBundleName());
 	}
 
@@ -66,6 +72,15 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
 		return this.applicationContext.getBean(type);
 	}
 
+	private void setFxmlRootPath(String path) {
+		if(path.endsWith("/")) {
+			this.fxmlRoot = path;
+		}
+		else {
+			this.fxmlRoot = path + "/";
+		}
+	}
+	
 	FXMLLoader loadSynchronously(URL resource, ResourceBundle bundle) throws IllegalStateException {
 
 		FXMLLoader loader = new FXMLLoader(resource, bundle);
@@ -142,7 +157,7 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
 	}
 
 	String getStyleSheetName() {
-		return getConventionalName(".css");
+		return fxmlRoot + getConventionalName(".css");
 	}
 
 	/**
@@ -201,15 +216,12 @@ public abstract class AbstractFxmlView implements ApplicationContextAware {
 	}
 
 	/**
-	 * @return the name of the fxml file derived from the FXML view. e.g. The name for the AirhacksView is going to be
-	 *         airhacks.fxml.
+	 * @return the relative path to the fxml file derived from the FXML view. e.g. The name for the AirhacksView is going to be
+	 *         <PATH>/airhacks.fxml.
 	 */
-	final String getFxmlName() {
-		return getConventionalName(".fxml");
-	}
 
-	final String getRootDirFxmlName() {
-		return FXML_ROOT + getConventionalName(".fxml");
+	final String getFxmlPath() {
+		return fxmlRoot + getConventionalName(".fxml");
 	}
 	
 	private ResourceBundle getResourceBundle(String name) {

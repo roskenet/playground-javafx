@@ -34,6 +34,11 @@ public class MainPresenter implements Initializable{
 	}
 
 	@FXML
+	public void showMain() {
+		application.showMainView();
+	}
+	
+	@FXML
 	public void reset() {
 		mainModel.reset();
 		application.showTestView();
