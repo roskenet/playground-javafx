@@ -30,7 +30,7 @@ import javafx.scene.layout.AnchorPane;
  * "https://github.com/AdamBien/afterburner.fx/blob/02f25fdde9629fcce50ea8ace5dec4f802958c8d/src/main/java/com/airhacks/afterburner/views/FXMLView.java"
  * >FXMLView</a> that provides DI for Java FX Controllers via Spring.
  * 
- * Felix Roske <felix.roske@zalando.de> changed this, so it always expects fxml Files in /fxml/.
+ * Felix Roske <felix.roske@zalando.de> changed this, so it always expects fxml Files by default in FXML_PATH.
  * 
  * @author Thomas Darimont
  */

@@ -1,12 +1,10 @@
 package de.felixroske.jfx;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Lazy;
 
-import de.felixroske.jfx.support.AbstractFxmlView;
 import de.felixroske.jfx.support.AbstractJavaFxApplicationSupport;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -23,9 +21,9 @@ public class PlaygroundJavafxApplication extends AbstractJavaFxApplicationSuppor
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		views.setStage(stage);
 		
 		Scene scene = new Scene(views.getMainView().getView());
+		views.setStage(stage);
 		views.setScene(scene);
 		
 		stage.setTitle(windowTitle);
