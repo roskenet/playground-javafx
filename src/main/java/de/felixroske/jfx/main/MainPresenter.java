@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import de.felixroske.jfx.PlaygroundJavafxApplication;
 import de.felixroske.jfx.test.MyTestService;
+import de.felixroske.jfx.test.TestView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -35,13 +36,13 @@ public class MainPresenter implements Initializable{
 
 	@FXML
 	public void showMain() {
-		application.showMainView();
+		application.showView(MainView.class);
 	}
 	
 	@FXML
 	public void reset() {
 		mainModel.reset();
-		application.showTestView();
+		application.showView(TestView.class);
 	}
 	
 	
