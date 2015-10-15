@@ -37,7 +37,7 @@ public abstract class AbstractJavaFxApplicationSupport extends Application {
 	public void showView(Class<? extends AbstractFxmlView> newView) {
 		AbstractFxmlView view = applicationContext.getBean(newView);
 		
-//		Scene scene = new Scene(view.getView());
+		Scene scene = new Scene(view.getView());
 		
 //		stage.setTitle(windowTitle);
 		stage.setScene(scene);
